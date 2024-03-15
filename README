@@ -1,0 +1,12 @@
+A "priority queue" has been used for the threads in ready state
+An array for threads in waiting state
+A pointer to the current thread in running state
+For the synchronization mechanism the switch_thread function is used,
+there we decide if we need to switch the thread for different reasons 
+(time quantum expired,lower priority than other thread etc.)
+When the change is made, the current thread's sempahore is decremrned, blocking it's execution and the new thread's 
+sempahore is incremented, starting it's execution
+This function is called at the end of each so_function apart from so_init and so_end,
+it's also called at the end of start_thread routine
+In the scheduler there is an array that memorises all the pthread_t, therefore it can be used to free the memory utilised
+by each thread, calling pthread_join in the so function
